@@ -9,7 +9,7 @@ export interface ICustomerRepository {
     badCreditHistoryCount: number
   ): Customer;
 
-  get(id: number): Customer | null;
+  get(id: number): Customer | undefined;
 }
 
 export class CustomerRepository implements ICustomerRepository {
@@ -35,7 +35,7 @@ export class CustomerRepository implements ICustomerRepository {
     return customer;
   }
 
-  get(id: number): Customer | null {
-    return this.customers.find((customer) => customer.id === id) || null;
+  get(id: number): Customer | undefined {
+    return this.customers.find((customer) => customer.id === id);
   }
 }

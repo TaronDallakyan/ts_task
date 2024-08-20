@@ -29,8 +29,8 @@ describe("MortgageApplicationQueueProcessor", () => {
       return customer;
     }
 
-    get(id: number): Customer | null {
-      return this.customers.find((customer) => customer.id === id) || null;
+    get(id: number): Customer | undefined {
+      return this.customers.find((customer) => customer.id === id);
     }
   }
 
@@ -68,14 +68,6 @@ describe("MortgageApplicationQueueProcessor", () => {
         expected,
       ]) => {
         it(`given a customerId ${customerId} when is valid then request is processed`, () => {
-          // const customer = new Customer(
-          //   customerId,
-          //   "first",
-          //   "last",
-          //   balance,
-          //   badCreditHistoryCount
-          // );
-
           const customer = customerRepo.create(
             customerId,
             "first",

@@ -9,9 +9,9 @@ export class MortgageApplicationQueueProcessor {
     this.customerRepository = customerRepository;
   }
 
-  static MESSAGE_INVALID_CUSTOMER = "Customer not found!";
+  private static readonly MESSAGE_INVALID_CUSTOMER = "Customer not found!";
 
-  checkWrongData(customer: Customer | null): void {
+  checkWrongData(customer: Customer | undefined): void {
     if (!customer)
       throw new WrongDataException(
         MortgageApplicationQueueProcessor.MESSAGE_INVALID_CUSTOMER
@@ -25,9 +25,9 @@ export class MortgageApplicationQueueProcessor {
     const customer = this.getCustomer(customerId);
     customer?.updateBalance(amountRequested);
   }
-  getCustomer(customerId: number): Customer | null {
+  getCustomer(customerId: number): Customer {
     const customer = this.customerRepository.get(customerId);
     this.checkWrongData(customer);
-    return customer;
+    return customer!;
   }
 }
